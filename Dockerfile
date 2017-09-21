@@ -6,9 +6,10 @@ MAINTAINER Nnwww <johndororo@gmail.com>
 RUN echo "https://dl-3.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "https://dl-3.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 
-# install ghc + cabal, sources
+# install libraries
 RUN apk update && apk upgrade && \
-    apk add alpine-sdk git linux-headers ca-certificates gmp-dev zlib-dev curl upx
+    apk add alpine-sdk git linux-headers ca-certificates gmp-dev zlib-dev curl ghc upx
 
-# install stack
-RUN curl -sSL https://get.haskellstack.org/ | sh
+# install stack & set system-ghc because stack fail to resolve compiler in alpine linux.
+RUN curl -sSL https://get.haskellstack.org/ | sh && \
+    stack config set system-ghc --global true
