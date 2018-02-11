@@ -8,7 +8,7 @@ RUN echo "https://dl-3.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositorie
 
 # install libraries
 RUN apk update && apk upgrade && \
-    apk add alpine-sdk git linux-headers ca-certificates gmp-dev zlib-dev curl ghc upx shadow
+    apk add alpine-sdk git linux-headers ca-certificates gmp-dev zlib-dev ncurses-dev curl ghc upx shadow
 
 # install stack & set system-ghc because stack fail to resolve compiler in alpine linux.
 RUN curl -sSL https://get.haskellstack.org/ | sh && \
